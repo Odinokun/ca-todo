@@ -19,7 +19,7 @@ function App() {
   return (
     <div className='App'>
       <Todolist title='What to learn' tasks={tasks1} date='11/11/2024' />
-      <Todolist title='What to buy' tasks={tasks2} />
+      <Todolist title='What to buy' />
     </div>
   );
 }

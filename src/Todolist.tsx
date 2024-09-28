@@ -1,6 +1,6 @@
 type PropsType = {
   title: string;
-  tasks: TaskType[];
+  tasks?: TaskType[];
   date?: string;
 };
 
@@ -19,12 +19,16 @@ export const Todolist = ({ title, tasks, date }: PropsType) => {
         <button>+</button>
       </div>
       <ul>
-        {tasks.map(t => (
-          <li key={t.id}>
-            <input type='checkbox' checked={t.isDone} />
-            <span>{t.title}</span>
-          </li>
-        ))}
+        {tasks ? (
+          tasks.map(t => (
+            <li key={t.id}>
+              <input type='checkbox' checked={t.isDone} />
+              <span>{t.title}</span>
+            </li>
+          ))
+        ) : (
+          <li>We have no tasks</li>
+        )}
       </ul>
       <div>
         <button>All</button>
