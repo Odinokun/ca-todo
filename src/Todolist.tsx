@@ -1,18 +1,21 @@
-import { TaskType } from './App';
+import { FilterValuesType, TaskType } from './App';
 import { Button } from './Button';
 
 type PropsType = {
   title: string;
   tasks?: TaskType[];
   date?: string;
+  filterTasks: (filter: FilterValuesType) => void;
   removeTask: (taskId: number) => void;
 };
 
-export const Todolist = ({ title, tasks, date, removeTask }: PropsType) => {
-  const onClickHandler = (id: number) => {
-    removeTask(id);
-  };
-
+export const Todolist = ({
+  title,
+  tasks,
+  date,
+  filterTasks,
+  removeTask,
+}: PropsType) => {
   return (
     <div>
       <h3>{title}</h3>
@@ -23,16 +26,16 @@ export const Todolist = ({ title, tasks, date, removeTask }: PropsType) => {
       <br />
 
       <div>
-        <Button title='All' callBack={() => {}} />
-        <Button title='Active' callBack={() => {}} />
-        <Button title='Completed' callBack={() => {}} />
+        <Button title='All' callBack={() => filterTasks('all')} />
+        <Button title='Active' callBack={() => filterTasks('active')} />
+        <Button title='Completed' callBack={() => filterTasks('completed')} />
       </div>
 
       <ul>
         {tasks ? (
           tasks.map(t => (
             <li key={t.id}>
-              <Button title='del' callBack={() => onClickHandler(t.id)} />
+              <Button title='del' callBack={() => removeTask(t.id)} />
               <input type='checkbox' checked={t.isDone} />
               <span>{t.title}</span>
             </li>
