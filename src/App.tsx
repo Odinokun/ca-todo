@@ -1,8 +1,14 @@
 import './App.css';
 import { Todolist } from './Todolist';
 
+export type TaskType = {
+  id: number;
+  title: string;
+  isDone: boolean;
+};
+
 function App() {
-  const tasks1 = [
+  const tasks: TaskType[] = [
     { id: 1, title: 'HTML&CSS', isDone: true },
     { id: 2, title: 'JS', isDone: true },
     { id: 3, title: 'React', isDone: false },
@@ -10,16 +16,13 @@ function App() {
     { id: 5, title: 'GraphQL', isDone: false },
   ];
 
-  const tasks2 = [
-    { id: 1, title: 'milk', isDone: true },
-    { id: 2, title: 'bread', isDone: false },
-    { id: 3, title: 'sugar', isDone: false },
-  ];
-
   return (
     <div className='App'>
-      <Todolist title='What to learn' tasks={tasks1} date='11/11/2024' />
-      <Todolist title='What to buy' />
+      <Todolist
+        title='What to learn'
+        tasks={tasks}
+        date={new Date().toLocaleDateString()}
+      />
     </div>
   );
 }
