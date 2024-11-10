@@ -5,29 +5,34 @@ type PropsType = {
   title: string;
   tasks?: TaskType[];
   date?: string;
+  removeTask: (taskId: number) => void;
 };
 
-export const Todolist = ({ title, tasks, date }: PropsType) => {
+export const Todolist = ({ title, tasks, date, removeTask }: PropsType) => {
+  const onClickHandler = (id: number) => {
+    removeTask(id);
+  };
+
   return (
     <div>
       <h3>{title}</h3>
       <div>
         <input />
-        <Button title='+' />
+        <Button title='+' callBack={() => {}} />
       </div>
       <br />
 
       <div>
-        <Button title='All' />
-        <Button title='Active' />
-        <Button title='Completed' />
+        <Button title='All' callBack={() => {}} />
+        <Button title='Active' callBack={() => {}} />
+        <Button title='Completed' callBack={() => {}} />
       </div>
 
       <ul>
         {tasks ? (
           tasks.map(t => (
             <li key={t.id}>
-              <button>del</button>
+              <Button title='del' callBack={() => onClickHandler(t.id)} />
               <input type='checkbox' checked={t.isDone} />
               <span>{t.title}</span>
             </li>
